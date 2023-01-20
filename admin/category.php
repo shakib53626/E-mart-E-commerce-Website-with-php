@@ -1,203 +1,337 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="assets/img/site-logo.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: NiceAdmin - v2.5.0
-  * Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
-</head>
-
-<body>
-    
-    <?php include('inc/header.php') ?>
-    <?php include('inc/side_menu.php') ?>
 
 
-  <main id="main" class="main">
 
-    <div class="pagetitle">
-      <h1>Products Category</h1>
-      <nav>
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-          <li class="breadcrumb-item active">Dashboard</li>
-          <li class="breadcrumb-item active">Category</li>
-        </ol>
-      </nav>
-    </div><!-- End Page Title -->
 
-    <section class="section dashboard">
-            <div class="row">
-              <div class="col-lg-5">
-                <!-- Add Category Form -->
-                <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">Add New Category</h5>
 
-                      <!-- No Labels Form -->
-                      <form class="row g-3" action="core/insert.php" method="POST" enctype="multipart/form-data">
-                        <div class="col-lg-6">
-                          <div class="col-md-12 my-5">
-                            <input type="text" class="form-control" placeholder="Category Name" name="cat_name" required>
-                          </div>
-                          <div class="col-md-12">
-                              <label for="" class="mb-1">Choose Your Parent Category</label>
-                              <select id="inputState" class="form-select" name="is_parent">
-                                <option selected="">Choose...</option>
-                                <?php
-                                $category_sql = "SELECT * FROM mart_category WHERE is_parent='0' ORDER BY e_name ASC";
-                                $category_res = mysqli_query($db,$category_sql);
-       
-                                while($row = mysqli_fetch_assoc($category_res)){
-                                 $cat_id     = $row['ID'];
-                                 $e_name     = $row['e_name'];
-                                 $e_image    = $row['e_image'];
-                                 $is_parent  = $row['is_parent'];
-                                 $c_status   = $row['c_status'];
-                                 
-                                 ?><option value="<?php echo $cat_id; ?>"><?php echo $e_name;?></option><?php
-                                }
-                                ?>
-                              </select>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="drop-zone ms-5">
-                              <span class="drop-zone__prompt">Drop file here or click to upload</span>
-                              <input type="file" name="myFile" class="drop-zone__input">
+<?php include 'inc/header.php'?>
+        <?php include 'inc/side_menu.php'?>
+
+        <div class="body">
+            <div class="body-header">
+                <h3>Dashboard</h3>
+                <ul>
+                    <li><a href="index.php">Home /</a></li>
+                    <li><a href="">Products /</a></li>
+                    <li><a href="add_products.php" class="active">Add Product</a></li>
+                </ul>
+                <hr>
+            </div>
+            <div class="body-main">
+                <!-- Body main section here -->
+                <div class="category">
+                    <div class="pupup-category" id="add-category">
+                        <div class="add-category">
+                            <button class="close"><i class="fa-solid fa-xmark me-3" onclick="document.getElementById('add-category').style.display='none'"></i></button>
+                            <h3 class="text-center mb-4">Add New Category</h3>
+
+
+                            <form action="core/insert.php" method="POST" enctype="multipart/form-data"><!--Add Category Form code Start-->
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label for="" class="mb-2">Category Name</label>
+                                        <input type="text" placeholder="Enter category name..." name="cat_name" required>
+                                        
+                                        <div class="panel">
+                                            <div class="button_outer">
+                                                <div class="btn_upload">
+                                                    <input type="file" id="upload_file" name="choose_file">
+                                                    Upload Image
+                                                </div>
+                                                <div class="processing_bar"></div>
+                                                <div class="success_box"></div>
+                                            </div>
+                                            <h5>Upload Category Image</h5>
+                                        </div>
+                                        <div class="error_msg"></div>
+                                        <div class="uploaded_file_view" id="uploaded_view">
+                                            <span class="file_remove">X</span>
+                                        </div>
+
+                                    </div><!--Coll-md-6 End-->
+
+
+                                    <div class="col-md-6">
+                                        <label for="" class="mb-2 d-block">Choose Your Parent Category</label>
+                                        <select name="is_parent" id="">
+                                            <option value="">Choose Category......</option>
+                                            <?php
+                                            $cat_info_sql = "SELECT * FROM mart_category WHERE is_parent='0' ORDER BY cat_name ASC";
+                                            $cat_info_res = mysqli_query($db,$cat_info_sql);
+                                            $serial = 0;
+                                            
+                                            while($cat_info_row = mysqli_fetch_assoc($cat_info_res)){
+                                                $cat_id     = $cat_info_row['ID'];
+                                                $cat_name   = $cat_info_row['cat_name'];
+                                                $cat_img    = $cat_info_row['cat_img'];
+                                                $is_parent  = $cat_info_row['is_parent'];
+                                                $cat_status = $cat_info_row['cat_status'];
+                                                ?><option value="<?php echo $cat_id;?>"><?php echo $cat_name;?></option><?php
+                                            
+                                            }
+
+                                            ?>
+                
+                                        </select>
+
+                                        <div class="cat-status mt-4">
+                                            <label for="" class="mb-2 d-block">Choose Category Status</label>
+                                            <select name="cat_status" id="">
+                                                <option value="1">Active</option>
+                                                <option value="0">Deactive</option>
+                                            </select>
+                                        </div>
+                                        <div class="cat-add-btn text-end mt-5">
+                                            <button type="submit" name="add_category">Add Category</button>
+                                        </div>
+                                    </div><!--Coll-md-6 End-->
+                                </div>
+                            </form><!--Add Category Form code End-->
+                        </div><!--Add-category code End-->
+                    </div>
+                </div><!-- Category section here -->
+                <div class="category-info">
+                    <div class="row">
+                        <div class="col-md-6 text-start">
+                            <div class="cat-info-search">
+                                <span>Search :</span> <input type="text" id="search" autocomplete="off" placeholder="Search......">
                             </div>
                         </div>
-                        <div class="text-center">
-                          <button type="submit" name="add_category" class="btn btn-primary">Submit</button>
-                          <button type="reset" class="btn btn-secondary">Reset</button>
+                        <div class="col-md-6">
+                            <div class="add-cat-button text-end mb-3">
+                                <a type="button" class="add_new_category" id="add_cat_btn" onclick="clcAddNew();"><i class="fa-solid fa-plus"></i> Add New</a>
+                            </div>
                         </div>
-                      </form><!-- End No Labels Form -->
-
                     </div>
-          </div>
-
-              </div>
-              <div class="col-lg-7">
-                <!-- All Category Table -->
-                <div class="card">
-                    <div class="card-body">
-                      <h5 class="card-title">All Categories information</h5>
-
-                      <!-- Table with hoverable rows -->
-                      <table class="table table-hover">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Image</th>
-                            <th scope="col">Category Name</th>
-                            <th scope="col">Status</th>
-                            <th scope="col">Action</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                        <?php
-
-                         $category_sql = "SELECT * FROM mart_category WHERE is_parent='0'";
-                         $category_res = mysqli_query($db,$category_sql);
-                         $serial = 0;
-                         
-
-                         while($row = mysqli_fetch_assoc($category_res)){
-                          $cat_id     = $row['ID'];
-                          $e_name     = $row['e_name'];
-                          $e_image    = $row['e_image'];
-                          $is_parent  = $row['is_parent'];
-                          $c_status   = $row['c_status'];
-                          $serial++;
-
-                          ?>
-                            <tr>
-                              <th scope="row"><?php echo $serial; ?></th>
-                              <td>
-                                <img src="assets/img/products/<?php echo $e_image; ?>" width="30" alt="">
-                              </td>
-                              <td><?php echo $e_name; ?></td>
-                              <td>
-                                <?php if($c_status == 0)echo '<span class="badge bg-danger">Deactive</span>';else echo '<span class="badge bg-success">Active</span>'; ?>
-                              </td>
-                              <td>
-                                <a href=""><i class="bi bi-pencil-square text-success"></i></a>
-                                <a href="category.php?id=<?php echo $cat_id;?>"><i class="bi bi-trash text-danger ms-3"></i></a>
-                              </td>
-                            </tr>
-                          
-                          <?php
-                          // find Sub category........
-                          Show_Sub_Category($cat_id);
-
-                         }
-
-                        ?>
-                      
-                        </tbody>
-                      </table>
-                      <!-- End Table with hoverable rows -->
-
-                    </div>
-          </div>
+                    <div class="cat-all-info mt-4">
+                        <div class="cat-info-table">
+                            <h5 class="mb-4 ms-3">All Category Information</h5>
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Sub-Cat-Image</th>
+                                        <th scope="col">Category Name</th>
+                                        <th scope="col">Sub-Category Name</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col" class="text-end">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
 
 
-              </div>
+                                    <?php
+                                        $cat_info_sql = "SELECT * FROM mart_category WHERE is_parent='0'";
+                                        $cat_info_res = mysqli_query($db,$cat_info_sql);
+                                        $serial = 0;
+                                        
+                                        while($cat_info_row = mysqli_fetch_assoc($cat_info_res)){
+                                            $cat_id     = $cat_info_row['ID'];
+                                            $cat_name   = $cat_info_row['cat_name'];
+                                            $cat_img    = $cat_info_row['cat_img'];
+                                            $sub_cname  = $cat_info_row['sub_cname'];
+                                            $is_parent  = $cat_info_row['is_parent'];
+                                            $cat_status = $cat_info_row['cat_status'];
+                                            $serial++;
+
+                                            ?>
+                                                <tr>
+                                                    <th scope="row"><?php echo $serial;?></th>
+                                                    <td><img src="assets/img/products/<?php echo $cat_img;?>" alt="" width="40"></td>
+                                                    <td><img src="assets/img/products/<?php echo '';?>" alt="" width="40"></td>
+                                                    <td><?php echo $cat_name;?></td>
+                                                    <td><?php echo $sub_cname;?></td>
+                                                    <td>
+                                                        <?php if($cat_status == 0)echo '<span class="badge bg-danger">Deactive</span>';else echo '<span class="badge bg-success">Active</span>';?>
+                                                    </td>
+                                                    <td class="text-end">
+                                                        <a href="category.php?edit_id=<?php echo $cat_id;?>" class="cat_edit"><i class="fa-solid fa-pen-to-square"></i> Edit</a>
+                                                        <!-- Edit Modal Code here -->
+
+
+
+                                                        <a href="" class="cat_delete" data-bs-toggle="modal" data-bs-target="#del_id<?php echo $cat_id;?>"><i class="fa-regular fa-trash-can"></i> Delete</a>
+                                                            <!-- modal Code -->
+                                                                <div class="modal fade delet_modal" id="del_id<?php echo $cat_id;?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                    <div class="modal-dialog">
+                                                                        <div class="modal-content">
+                                                                            <div class="modal-footer  p-4">
+                                                                                <div class="confirmition-mg">
+                                                                                    <h5>Are You Sure You Want to <span class="text-danger">Delete</span> This ?</h5>
+                                                                                </div>
+                                                                                <div class="modal-btn">
+                                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                                    <a type="button" class="btn btn-success" href="category.php?del_id=<?php echo $cat_id;?>">Confirm</a>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div><!-- Delete modal Code End -->
+                                                    </td>
+                                                </tr>
+
+                                            <?php
+
+                                            // Sub-Category Code Here*******************
+                                            Show_Sub_Category($cat_id);
+
+
+                                        }
+                                    
+                                    ?>
+                                </tbody>
+                            </table>
+                        </div><!-- cat-info-table -->
+                    </div><!-- Cat-all-info End -->
+                </div>
             </div>
-    </section>
-
-  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-
-  <?php include('inc/footer.php') ?>
+                    
 
 
-  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+        </div>
 
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/apexcharts/apexcharts.min.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/chart.js/chart.umd.js"></script>
-  <script src="assets/vendor/echarts/echarts.min.js"></script>
-  <script src="assets/vendor/quill/quill.min.js"></script>
-  <script src="assets/vendor/simple-datatables/simple-datatables.js"></script>
-  <script src="assets/vendor/tinymce/tinymce.min.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
 
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
 
-</body>
 
-</html>
+<!-- ------------------------------------------------------
+-----------------------------------------------------------
+            Delete Php code here
+----------------------------------------------------------
+--------------------------------------------------------- -->
+
+<?php
+
+if(isset($_GET['del_id'])){
+    $del_id = $_GET['del_id'];
+
+    $cat_del_res = mysqli_query($db,"DELETE FROM mart_category WHERE ID='$del_id'");
+    if($cat_del_res){
+        header('location: category.php');
+    }else{
+        die('Category Delete Error!'.mysqli_error($db));
+    }
+}
+
+?>
+<!-- ------------------------------------------------------
+-----------------------------------------------------------
+            Delete Php code End
+----------------------------------------------------------
+--------------------------------------------------------- -->
+
+
+
+<!-- ------------------------------------------------------
+-----------------------------------------------------------
+            Edit Category Code here
+----------------------------------------------------------
+--------------------------------------------------------- -->
+<?php
+
+if(isset($_GET['edit_id'])){
+    $edit_id = $_GET['edit_id'];
+
+    $cat_info_sql = "SELECT * FROM mart_category WHERE ID='$edit_id'";
+    $cat_info_res = mysqli_query($db,$cat_info_sql);
+    $serial = 0;
+    
+    while($cat_info_row = mysqli_fetch_assoc($cat_info_res)){
+        $edit_cat_name   = $cat_info_row['cat_name'];
+        $edit_cat_img    = $cat_info_row['cat_img'];
+        $edit_sub_cname  = $cat_info_row['sub_cname'];
+        $edit_is_parent  = $cat_info_row['is_parent'];
+        $edit_cat_status = $cat_info_row['cat_status'];
+    }
+
+    
+    ?>
+    <div class="edit_category" id="edit_category">
+        <div class="edit_cat">
+                <div class="add-category">
+                    <button class="close"><i class="fa-solid fa-xmark me-3" onclick="document.getElementById('edit_category').style.display='none'"></i></button>
+                    <h3 class="text-center mb-4">Edite Category</h3>
+
+
+                    <form action="core/update.php" method="POST" enctype="multipart/form-data"><!--Add Category Form code Start-->
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label for="" class="mb-2">Category Name</label>
+                                <input type="text" value="<?php echo $edit_cat_name;?>" placeholder="Enter category name..." name="cat_name" required>
+                                
+                                <div class="panel">
+                                    <?php
+                                        if(empty($edit_cat_img)){
+                                            echo '<p class="alert alert-danger">No Image Found</p>';
+                                        }else{
+                                            ?>
+                                            <div class="mb-3"><img src="assets/img/products/<?php echo $edit_cat_img;?>" alt="" width="100"></div>
+                                            <?php
+                                        }
+                                    
+                                    ?>
+                                    <div class="button_outer button_outer_edit">
+                                        <div class="btn_upload">
+                                            <input type="file" id="edit_upload_file" name="choose_file">
+                                            Upload Image
+                                        </div>
+                                        <div class="processing_bar"></div>
+                                        <div class="success_box"></div>
+                                    </div>
+                                </div>
+                                <div class="error_msg edit_error_msg"></div>
+                                <div class="uploaded_file_view" id="edit_uploaded_view">
+                                    <span class="file_remove">X</span>
+                                </div>
+
+                            </div><!--Coll-md-6 End-->
+
+
+                            <div class="col-md-6">
+                                <label for="" class="mb-2 d-block">Parent Category</label>
+                                <select name="is_parent" id="">
+                                    <option value="">Choose Category......</option>
+                                    <?php
+                                    $cat_info_sql = "SELECT * FROM mart_category WHERE is_parent='0' ORDER BY cat_name ASC";
+                                    $cat_info_res = mysqli_query($db,$cat_info_sql);
+                                    $serial = 0;
+                                    
+                                    while($cat_info_row = mysqli_fetch_assoc($cat_info_res)){
+                                        $cat_id     = $cat_info_row['ID'];
+                                        $cat_name   = $cat_info_row['cat_name'];
+                                        $cat_img    = $cat_info_row['cat_img'];
+                                        $is_parent  = $cat_info_row['is_parent'];
+                                        $cat_status = $cat_info_row['cat_status'];
+                                        ?><option value="<?php echo $cat_id;?>" <?php if($edit_is_parent == $cat_id)echo 'selected';?>><?php echo $cat_name;?></option><?php
+                                    
+                                    }
+
+                                    ?>
+        
+                                </select>
+
+                                <div class="cat-status mt-4">
+                                    <label for="" class="mb-2 d-block">Category Status</label>
+                                    <select name="cat_status" id="">
+                                        <option value="1" <?php if($edit_cat_status == 1)echo 'selected';?>>Active</option>
+                                        <option value="0" <?php if($edit_cat_status == 0)echo 'selected';?>>Deactive</option>
+                                    </select>
+                                </div>
+                                <div class="cat-add-btn text-end mt-5">
+                                    <input type="hidden" name="editid" value="<?php echo $edit_id;?>">
+                                    <button type="submit" name="update_category">Update Category</button>
+                                </div>
+                            </div><!--Coll-md-6 End-->
+                        </div>
+                    </form><!--Add Category Form code End-->
+                </div><!--Add-category code End-->
+            
+        </div><!--Edit Cat Code End -->
+    </div>
+    
+    
+    <?php
+
+}
+
+?>
+<?php include('inc/footer.php')?>

@@ -1,10 +1,9 @@
 <?php
-    $db = mysqli_connect('localhost', 'root', '', 'e_mart');
 
-    if($db){
-        // echo 'Database is Connected';
-    }else{
-        die('Database Connection is Error'.mysqli_error());
-    }
+$db = mysqli_connect('localhost', 'root', '', 'e_commerce');
 
-?>
+if($db){
+    // echo 'Database Connection Successfully';
+}else{
+    die('Database Connection Error!'.mysqli_error($db));
+}

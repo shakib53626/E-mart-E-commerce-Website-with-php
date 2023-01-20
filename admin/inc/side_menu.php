@@ -1,126 +1,43 @@
-  <!-- ======= Sidebar ======= -->
-  <aside id="sidebar" class="sidebar">
-
-    <ul class="sidebar-nav" id="sidebar-nav">
-
-      <li class="nav-item">
-        <a class="nav-link " href="index.html">
-          <i class="bi bi-grid"></i>
-          <span>Dashboard</span>
-        </a>
-      </li><!-- End Dashboard Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-menu-button-wide"></i><span>E-Commerce</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="components-alerts.html">
-              <i class="bi bi-circle"></i><span>All Orders</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-accordion.html">
-              <i class="bi bi-circle"></i><span>Coupon Code</span>
-            </a>
-          </li>
-          <li>
-            <a href="components-badges.html">
-              <i class="bi bi-circle"></i><span>Payment Gateway</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Components Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="forms-elements.html">
-              <i class="bi bi-circle"></i><span>Form Elements</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-layouts.html">
-              <i class="bi bi-circle"></i><span>Form Layouts</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-editors.html">
-              <i class="bi bi-circle"></i><span>Form Editors</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-validation.html">
-              <i class="bi bi-circle"></i><span>Form Validation</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Forms Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-layout-text-window-reverse"></i><span>Products</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="category.php">
-              <i class="bi bi-circle"></i><span>Category</span>
-            </a>
-          </li>
-          <li>
-            <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Brand</span>
-            </a>
-          </li>
-          <li>
-            <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>Add New Product</span>
-            </a>
-          </li>
-          <li>
-            <a href="tables-data.html">
-              <i class="bi bi-circle"></i><span>View All Products</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Tables Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link" href="#">
-          <i class="bi bi-bar-chart"></i><span>Reports</span></a>
-      </li><!-- End Charts Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-gem"></i><span>Users</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="icons-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a href="icons-bootstrap.html">
-              <i class="bi bi-circle"></i><span>Add New User</span>
-            </a>
-          </li>
-          <li>
-            <a href="icons-remix.html">
-              <i class="bi bi-circle"></i><span>View All Users</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Icons Nav -->
-
-      <li class="nav-heading">Pages</li>
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
-          <i class="bi bi-person"></i>
-          <span>Theme Option</span>
-        </a>
-      </li><!-- End Profile Page Nav -->
-
-    </ul>
-
-  </aside><!-- End Sidebar-->
+<div class="side-menu">
+                <div class="accrodion">
+                    <div class="contentBx">
+                        <div class="label h-effict" onclick="location.href='index.php'"><i class="fa-solid fa-chart-line me-2"></i> Dashboard</div>
+                    </div>
+                    <div class="contentBx">
+                        <div class="label"><i class="fa-solid fa-dumpster me-2"></i> E-Commerce <i class="fa-solid fa-angle-down" id="downR"></i></div>
+                        <div class="content">
+                            <ul>
+                                <li><i class="fa-regular fa-circle"></i> All Orders</li>
+                                <li><i class="fa-regular fa-circle"></i> Coupon Code</li>
+                                <li><i class="fa-regular fa-circle"></i> Payment Getway</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="contentBx">
+                        <div class="label"><i class="fa-brands fa-shopify me-2"></i> Products <i class="fa-solid fa-angle-down" id="downR"></i></div>
+                        <div class="content">
+                            <ul>
+                                <li><i class="fa-regular fa-circle"></i><a href="category.php"> Category</a></li>
+                                <li><i class="fa-regular fa-circle"></i><a href="brand.php"> Brand</a></li>
+                                <li><i class="fa-regular fa-circle"></i> Alerts</li>
+                                <li><i class="fa-regular fa-circle"></i> Alerts</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="contentBx">
+                        <div class="label h-effict"><i class="fa-solid fa-chart-simple me-2"></i> Reports</div>
+                    </div>
+                    <div class="contentBx">
+                        <div class="label"><i class="fa-regular fa-user me-2"></i> Users <i class="fa-solid fa-angle-down" id="downR"></i></div>
+                        <div class="content">
+                            <ul>
+                                <li onclick="location.href='add_users.php'"><i class="fa-regular fa-circle"></i> Add New User</li>
+                                <li><i class="fa-regular fa-circle"></i> View All Users</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="contentBx">
+                        <div class="label h-effict"><i class="fa-solid fa-sliders me-2"></i> Theme Options</div>
+                    </div>
+                </div>
+            </div>

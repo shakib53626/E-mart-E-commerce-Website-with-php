@@ -1,0 +1,16 @@
+-------------------Database Creation Code--------------------------
+
+		CREATE DATABASE e_commerce;
+
+-------------------Table Creation Code--------------------------
+
+
+CREATE TABLE mart_category(
+	ID int AUTO_INCREMENT,
+    cat_name varchar(50) NOT null,
+    cat_img varchar(255) DEFAULT 0,
+    sub_cname varchar(50),
+    is_parent int NOT null DEFAULT 0,
+    cat_status int DEFAULT 0 COMMENT '0 for Deactive 1 for active',
+    PRIMARY KEY (ID)
+)
