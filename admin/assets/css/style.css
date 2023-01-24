@@ -265,6 +265,9 @@ Body herder Code CSS Start
 .body .body-header a{
     color: rgb(95, 95, 95);
 }
+.body .body-header a:hover{
+    color: green;
+}
 .body .body-header .active{
     color: green;
 }
@@ -497,4 +500,52 @@ select option{
 
 /* ----------------------------------------
 Edit category css code start
+------------------------------------------- */
+
+/* ----------------------------------------
+Add Product css code start
+------------------------------------------- */
+.add_product{
+    background: #fff;
+    border-radius: 10px;
+    padding: 30px;
+}
+.add_product label{
+    display: block;
+    font-size: 18px;
+}
+.add_product input,
+.add_product select{
+    border: none;
+    padding: 0 10px 0 0;
+    border-bottom: 1px solid green;
+    width: 100%;
+    background: transparent;
+}
+.add_product input:focus,
+.add_product textarea:focus{
+    outline: none;
+}
+.add_product textarea{
+    border: none;
+    border: 1px solid green;
+    width: 100%;
+    padding: 10px;
+}
+.add_product .col-md-8{
+    border-right: 1px solid green;
+}
+.add_product ::placeholder{
+    font-size: 14px;
+}
+.ql-toolbar.ql-snow{
+    border: 1px solid green !important;
+}
+.ql-toolbar.ql-snow + .ql-container.ql-snow{
+    border: 1px solid green;
+}
+
+
+/* ----------------------------------------
+Add Product css code End
 ------------------------------------------- */

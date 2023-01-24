@@ -22,6 +22,9 @@
     <!-- Style Css Code -->
     <link rel="stylesheet" href="assets/css/style.css">
 
+    <link rel="stylesheet" href="//cdn.quilljs.com/1.2.0/quill.snow.css">
+    <link rel="stylesheet" href="//cdn.quilljs.com/1.2.0/quill.bubble.css">
+
     <title>Web-Admin</title>
   </head>
   <body>

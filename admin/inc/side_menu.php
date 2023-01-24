@@ -19,8 +19,7 @@
                             <ul>
                                 <li><i class="fa-regular fa-circle"></i><a href="category.php"> Category</a></li>
                                 <li><i class="fa-regular fa-circle"></i><a href="brand.php"> Brand</a></li>
-                                <li><i class="fa-regular fa-circle"></i> Alerts</li>
-                                <li><i class="fa-regular fa-circle"></i> Alerts</li>
+                                <li><i class="fa-regular fa-circle"></i><a href="add_product.php"> All Products</a></li>
                             </ul>
                         </div>
                     </div>
